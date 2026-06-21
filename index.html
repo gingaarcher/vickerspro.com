@@ -1,11 +1,891 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VickersPro — Web Design Cincinnati</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VickersPro — Web Design Cincinnati | Sites Live in 7 Days</title>
+  <meta name="description" content="Cincinnati's local web design agency. We build custom websites for small businesses — free demo first, new site live within a week. Simple monthly plans, no contracts.">
+  <meta property="og:title" content="VickersPro — Web Design Cincinnati">
+  <meta property="og:description" content="We build websites that get you customers. Free demo, live in 7 days.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      padding-top: var(--nav-h);
+    }
+
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 900px;
+    }
+
+    .hero-content .label { margin-bottom: 24px; }
+
+    .hero-content h1 { margin-bottom: 24px; }
+
+    .blue-text {
+      color: var(--blue);
+      text-shadow: 0 0 60px rgba(0, 153, 255, 0.4);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 20px);
+      color: var(--gray);
+      max-width: 520px; margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-btns {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; flex-wrap: wrap;
+    }
+
+    .hero-btns .btn-primary { padding: 16px 36px; font-size: 16px; }
+    .hero-btns .btn-outline  { padding: 16px 32px; font-size: 16px; }
+
+    .hero-scroll {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      z-index: 2;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    .hero-scroll-line {
+      width: 1.5px; height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--blue));
+    }
+    .hero-scroll span {
+      font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── WHAT WE DO ── */
+    #what-we-do { background: var(--bg); }
+    #what-we-do .sec-head { max-width: 600px; margin-bottom: 64px; }
+    #what-we-do h2 { margin-bottom: 18px; }
+    #what-we-do .sec-sub { font-size: 18px; }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 1px rgba(0,153,255,0.12), 0 20px 56px rgba(0,153,255,0.08);
+      transform: translateY(-4px);
+    }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      background: var(--blue-low);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+      border: 1px solid rgba(0,153,255,0.2);
+    }
+
+    .card h3 { color: var(--white); margin-bottom: 12px; }
+    .card p   { font-size: 15px; line-height: 1.65; }
+
+    @media (max-width: 820px) { .cards-3 { grid-template-columns: 1fr; gap: 16px; } }
+    @media (min-width: 540px) and (max-width: 820px) { .cards-3 { grid-template-columns: 1fr 1fr; } }
+
+    /* ── HOW IT WORKS ── */
+    #how-it-works { background: var(--bg-2); }
+    #how-it-works .sec-head { max-width: 540px; margin-bottom: 72px; }
+    #how-it-works h2 { margin-bottom: 18px; }
+
+    .timeline {
+      display: flex; flex-direction: column; gap: 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 28px; top: 20px; bottom: 20px;
+      width: 1px; background: var(--border);
+    }
+
+    .tl-item {
+      display: flex; gap: 32px; padding: 0 0 56px 0;
+      position: relative;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+
+    .tl-num {
+      width: 56px; height: 56px; flex-shrink: 0;
+      background: var(--bg-card);
+      border: 1.5px solid var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700; color: var(--blue);
+      letter-spacing: -0.5px;
+      position: relative; z-index: 1;
+      box-shadow: 0 0 24px rgba(0, 153, 255, 0.18);
+    }
+
+    .tl-body { padding-top: 14px; }
+    .tl-body h3 { color: var(--white); margin-bottom: 10px; }
+    .tl-body p  { font-size: 15px; max-width: 560px; }
+
+    @media (max-width: 540px) {
+      .timeline::before { left: 22px; }
+      .tl-num { width: 44px; height: 44px; font-size: 13px; }
+      .tl-item { gap: 20px; }
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--bg); }
+    #pricing .sec-head { max-width: 600px; margin-bottom: 16px; }
+    #pricing h2 { margin-bottom: 18px; }
+
+    .pricing-note-top {
+      color: var(--gray); font-size: 15px;
+      margin-bottom: 56px;
+    }
+    .pricing-note-top strong { color: var(--blue); font-weight: 600; }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .p-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 36px 32px;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .p-card:hover {
+      border-color: rgba(0,153,255,0.5);
+      box-shadow: 0 0 0 1px rgba(0,153,255,0.12), 0 24px 64px rgba(0,153,255,0.1);
+      transform: translateY(-6px);
+    }
+
+    .p-card.featured {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 1px rgba(0,153,255,0.15), 0 0 80px rgba(0,153,255,0.08);
+    }
+
+    .p-badge {
+      display: inline-block;
+      background: var(--blue-low);
+      border: 1px solid rgba(0,153,255,0.3);
+      color: var(--blue);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .p-tier {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 16px;
+    }
+
+    .p-price {
+      display: flex; align-items: baseline; gap: 4px;
+      margin-bottom: 28px;
+    }
+    .p-price .amount {
+      font-size: 52px; font-weight: 800;
+      letter-spacing: -3px; line-height: 1;
+      color: var(--white);
+    }
+    .p-price .per {
+      font-size: 16px; color: var(--gray); font-weight: 500;
+    }
+
+    .p-features {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 13px;
+      margin-bottom: 36px;
+    }
+
+    .p-features li {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--off);
+    }
+
+    .p-features li svg { flex-shrink: 0; }
+
+    .p-card .btn { width: 100%; justify-content: center; }
+
+    @media (max-width: 900px) { .pricing-cards { grid-template-columns: 1fr; max-width: 400px; } }
+
+    /* ── WHY US ── */
+    #why-us { background: var(--bg-2); }
+    #why-us .sec-head { max-width: 600px; margin-bottom: 64px; }
+    #why-us h2 { margin-bottom: 18px; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 28px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stat-card:hover { border-color: rgba(0,153,255,0.3); transform: translateY(-4px); }
+
+    .stat-num {
+      font-size: clamp(42px, 5vw, 60px);
+      font-weight: 800; letter-spacing: -3px;
+      color: var(--blue); line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .stat-label {
+      font-size: 14px; color: var(--gray);
+      line-height: 1.5; font-weight: 500;
+    }
+
+    @media (max-width: 900px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+
+    /* ── CTA ── */
+    #cta { background: var(--bg); }
+
+    .cta-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 80px 60px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, rgba(0,153,255,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box .label { margin-bottom: 20px; }
+    .cta-box h2 { margin-bottom: 18px; }
+    .cta-box > p { max-width: 480px; margin: 0 auto 40px; font-size: 17px; }
+
+    .cta-actions {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .cta-box { padding: 48px 24px; }
+      .cta-actions { flex-direction: column; }
+      .cta-actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-<h1>VickersPro — Coming Soon</h1>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- Loading Screen -->
+<div id="loader">
+  <div class="ld-mark">Vickers<span>Pro</span></div>
+  <div class="ld-track"><div class="ld-fill"></div></div>
+</div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Vickers<span>Pro</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Get Free Demo</a>
+    <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="mm-cta">Get Free Demo</a>
+</div>
+
+<!-- ======================================================
+     HERO
+     ====================================================== -->
+<section id="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <div class="label">Cincinnati Web Design</div>
+    <h1>We Build Websites<br>That Get You<br><span class="blue-text">Customers</span></h1>
+    <p class="hero-sub">Cincinnati's local web design agency — new site live within a week.</p>
+    <div class="hero-btns">
+      <a href="contact.html" class="btn btn-primary">Get a Free Demo</a>
+      <a href="services.html" class="btn btn-outline">See What We Do</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ======================================================
+     WHAT WE DO
+     ====================================================== -->
+<section id="what-we-do">
+  <div class="container">
+    <div class="sec-head">
+      <div class="label reveal">What We Do</div>
+      <h2 class="reveal">Everything your business<br>needs online</h2>
+      <p class="sec-sub reveal d1">From zero to launched — or a complete transformation of what you already have.</p>
+    </div>
+    <div class="cards-3">
+
+      <div class="card reveal d1">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <rect x="2" y="4" width="24" height="16" rx="2.5" stroke="#0099FF" stroke-width="1.8"/>
+            <path d="M10 26h8M14 20v6" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>New Websites</h3>
+        <p>Built from scratch for businesses with nothing online yet. We handle design, copy, and launch — you just show up.</p>
+      </div>
+
+      <div class="card reveal d2">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path d="M6 14C6 9.58 9.58 6 14 6c2.8 0 5.26 1.4 6.8 3.5L18 12h7V5l-2.5 2.5" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 14c0 4.42-3.58 8-8 8-2.8 0-5.26-1.4-6.8-3.5L10 16H3v7l2.5-2.5" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Full Redesigns</h3>
+        <p>Transform your outdated site into a modern, converting machine. We keep what works and rebuild everything that doesn't.</p>
+      </div>
+
+      <div class="card reveal d3">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <path d="M14 3L3 8v8c0 6.08 4.72 11.76 11 13 6.28-1.24 11-6.92 11-13V8L14 3z" stroke="#0099FF" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9.5 14l3 3 6-6" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Monthly Care</h3>
+        <p>Hosting, updates, SEO, Google Business — we manage everything monthly so you never have to touch it.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     HOW IT WORKS
+     ====================================================== -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="sec-head">
+      <div class="label reveal">The Process</div>
+      <h2 class="reveal">Simple start,<br>fast results</h2>
+      <p class="reveal d1">Four steps from intro call to live website.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item reveal-3d">
+        <div class="tl-num">01</div>
+        <div class="tl-body">
+          <h3>We research your business</h3>
+          <p>We study your industry, your competitors, and your customers before writing a single line of code. Good research builds websites that convert.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal-3d d1">
+        <div class="tl-num">02</div>
+        <div class="tl-body">
+          <h3>We build you a free demo</h3>
+          <p>See your actual website — built specifically for your business — before you pay anything. No mockups, no templates. Real code.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal-3d d2">
+        <div class="tl-num">03</div>
+        <div class="tl-body">
+          <h3>You approve, we go live</h3>
+          <p>Love it? We handle everything: domain, hosting, launch. Your site is live within the week — often faster.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal-3d d3">
+        <div class="tl-num">04</div>
+        <div class="tl-body">
+          <h3>We manage everything monthly</h3>
+          <p>You run your business. We keep your site fast, secure, updated, and ranking in local search — every single month.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     PRICING
+     ====================================================== -->
+<section id="pricing">
+  <div class="container">
+    <div class="sec-head">
+      <div class="label reveal">Pricing</div>
+      <h2 class="reveal">Simple, transparent<br>monthly plans</h2>
+    </div>
+    <p class="pricing-note-top reveal d1"><strong>Build fee waived</strong> on all 12-month plans. Cancel anytime on month-to-month.</p>
+
+    <div class="pricing-cards">
+
+      <div class="p-card reveal d1">
+        <div class="p-tier">Basic</div>
+        <div class="p-price">
+          <span class="amount">$150</span>
+          <span class="per">/mo</span>
+        </div>
+        <ul class="p-features">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Custom website
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Hosting included
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Security &amp; backups
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Monthly content updates
+          </li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline">Get Started</a>
+      </div>
+
+      <div class="p-card featured reveal d2">
+        <div class="p-badge">Most Popular</div>
+        <div class="p-tier">Standard</div>
+        <div class="p-price">
+          <span class="amount">$250</span>
+          <span class="per">/mo</span>
+        </div>
+        <ul class="p-features">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Everything in Basic
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Local SEO optimization
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google Business setup
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Monthly ranking report
+          </li>
+        </ul>
+        <a href="contact.html" class="btn btn-primary">Get Started</a>
+      </div>
+
+      <div class="p-card reveal d3">
+        <div class="p-tier">Growth</div>
+        <div class="p-price">
+          <span class="amount">$400</span>
+          <span class="per">/mo</span>
+        </div>
+        <ul class="p-features">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Everything in Standard
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Google Ads management
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Monthly performance report
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Priority support
+          </li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline">Get Started</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     WHY US
+     ====================================================== -->
+<section id="why-us">
+  <div class="container">
+    <div class="sec-head">
+      <div class="label reveal">Why VickersPro</div>
+      <h2 class="reveal">Built different.<br>For businesses like yours.</h2>
+      <p class="reveal d1">No agency bloat. No 6-week timelines. No contracts forcing you to stay.</p>
+    </div>
+    <div class="stats-grid">
+
+      <div class="stat-card reveal d1">
+        <div class="stat-num" data-count="7" data-suffix=" days">0</div>
+        <div class="stat-label">Average time to launch</div>
+      </div>
+
+      <div class="stat-card reveal d2">
+        <div class="stat-num" data-prefix="$" data-count="0">$0</div>
+        <div class="stat-label">Cost to see your demo</div>
+      </div>
+
+      <div class="stat-card reveal d3">
+        <div class="stat-num" data-count="100" data-suffix="%">0%</div>
+        <div class="stat-label">Local Cincinnati team</div>
+      </div>
+
+      <div class="stat-card reveal d4">
+        <div class="stat-num no-count">No</div>
+        <div class="stat-label">Lock-in contracts</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     CTA
+     ====================================================== -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="label">Get Started Today</div>
+      <h2>Ready to get started?<br>We already built your demo.</h2>
+      <p>See your custom website before you pay anything. No commitment, no risk — just a real website built for your business.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary">Get Your Free Demo</a>
+        <a href="mailto:vickers1professional@gmail.com" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M1 5.5l7 4.5 7-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          vickers1professional@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <a href="index.html" class="ft-logo">Vickers<span>Pro</span></a>
+      <p>Cincinnati's local web design agency. New site live within a week.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#new">New Websites</a></li>
+        <li><a href="services.html#redesign">Full Redesigns</a></li>
+        <li><a href="services.html#care">Monthly Care</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:vickers1professional@gmail.com">vickers1professional@gmail.com</a></li>
+        <li><a href="contact.html">Get a Free Demo</a></li>
+        <li><a href="#">Cincinnati, OH</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>&copy; 2026 VickersPro. All rights reserved.</span>
+    <span>Cincinnati, OH</span>
+  </div>
+</footer>
+
+<!-- Three.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+
+<script>
+/* ============================================================
+   CURSOR
+   ============================================================ */
+const cur  = document.getElementById('cursor');
+const trail = document.getElementById('cursor-trail');
+let mx = 0, my = 0, tx = 0, ty = 0;
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+function animCursor() {
+  tx += (mx - tx) * 0.14;
+  ty += (my - ty) * 0.14;
+  if (cur)   { cur.style.left = mx + 'px'; cur.style.top = my + 'px'; }
+  if (trail) { trail.style.left = tx + 'px'; trail.style.top = ty + 'px'; }
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+
+document.querySelectorAll('a, button, .card, .p-card, .stat-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+const loader = document.getElementById('loader');
+window.addEventListener('load', () => {
+  setTimeout(() => loader && loader.classList.add('out'), 900);
+});
+
+/* ============================================================
+   NAV: solid on scroll
+   ============================================================ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+nav.classList.toggle('scrolled', window.scrollY > 40);
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const ham  = document.getElementById('ham');
+const menu = document.getElementById('mobile-menu');
+let open = false;
+
+ham.addEventListener('click', () => {
+  open = !open;
+  ham.classList.toggle('open', open);
+  menu.classList.toggle('open', open);
+  ham.setAttribute('aria-expanded', open);
+  menu.setAttribute('aria-hidden', !open);
+});
+
+menu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    open = false;
+    ham.classList.remove('open');
+    menu.classList.remove('open');
+  });
+});
+
+/* ============================================================
+   SCROLL REVEAL (regular + 3D variant)
+   ============================================================ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-3d').forEach(el => io.observe(el));
+
+/* ============================================================
+   STAT COUNTERS
+   ============================================================ */
+function countUp(el, target, prefix, suffix, duration) {
+  const start = performance.now();
+  const step = ts => {
+    const progress = Math.min((ts - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = (prefix || '') + Math.round(target * ease) + (suffix || '');
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = (prefix || '') + target + (suffix || '');
+  };
+  requestAnimationFrame(step);
+}
+
+const statIO = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    if (el.classList.contains('no-count')) return;
+    const target  = parseInt(el.dataset.count, 10);
+    const prefix  = el.dataset.prefix  || '';
+    const suffix  = el.dataset.suffix  || '';
+    countUp(el, target, prefix, suffix, 1400);
+    statIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-num').forEach(el => statIO.observe(el));
+
+/* ============================================================
+   THREE.JS HERO
+   ============================================================ */
+function initHero() {
+  if (typeof THREE === 'undefined') return;
+
+  const canvas = document.getElementById('hero-canvas');
+  const section = document.getElementById('hero');
+  if (!canvas || !section) return;
+
+  const W = section.offsetWidth;
+  const H = section.offsetHeight;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x07090F, 0.022);
+
+  const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 200);
+  camera.position.z = 28;
+
+  /* Geometries */
+  const geoData = [
+    { geo: new THREE.IcosahedronGeometry(3.2, 0),  pos: [-10, 4, -8],  speed: 0.004 },
+    { geo: new THREE.OctahedronGeometry(2.2),       pos: [10, -3, -6],  speed: 0.006 },
+    { geo: new THREE.TetrahedronGeometry(2.8),      pos: [5, 6, -12],   speed: 0.003 },
+    { geo: new THREE.IcosahedronGeometry(1.6, 0),   pos: [-7, -5, -4],  speed: 0.008 },
+    { geo: new THREE.OctahedronGeometry(1.4),       pos: [14, 2, -14],  speed: 0.005 },
+    { geo: new THREE.IcosahedronGeometry(2.6, 0),   pos: [-14, 2, -10], speed: 0.003 },
+    { geo: new THREE.TetrahedronGeometry(1.8),      pos: [2, -7, -6],   speed: 0.007 },
+  ];
+
+  const meshes = geoData.map(({ geo, pos, speed }) => {
+    const mat = new THREE.MeshBasicMaterial({
+      color: 0x0099FF,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.22,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(...pos);
+    mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+    scene.add(mesh);
+    return { mesh, speed, rx: (Math.random() - 0.5) * 0.01, ry: (Math.random() - 0.5) * 0.01 };
+  });
+
+  /* Solid dim fills */
+  geoData.forEach(({ geo, pos }) => {
+    const mat = new THREE.MeshBasicMaterial({
+      color: 0x003366,
+      transparent: true,
+      opacity: 0.06,
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(...pos);
+    scene.add(mesh);
+  });
+
+  /* Mouse parallax */
+  let tmx = 0, tmy = 0;
+  let cmx = 0, cmy = 0;
+  document.addEventListener('mousemove', e => {
+    tmx = (e.clientX / window.innerWidth  - 0.5) * 5;
+    tmy = (e.clientY / window.innerHeight - 0.5) * 3;
+  });
+
+  /* Resize */
+  const onResize = () => {
+    const nw = section.offsetWidth, nh = section.offsetHeight;
+    camera.aspect = nw / nh;
+    camera.updateProjectionMatrix();
+    renderer.setSize(nw, nh);
+  };
+  window.addEventListener('resize', onResize, { passive: true });
+
+  /* Animate */
+  let animating = true;
+  const heroObs = new IntersectionObserver(([e]) => { animating = e.isIntersecting; });
+  heroObs.observe(section);
+
+  function tick() {
+    requestAnimationFrame(tick);
+    if (!animating) return;
+    meshes.forEach(({ mesh, speed }) => {
+      mesh.rotation.x += speed * 0.9;
+      mesh.rotation.y += speed;
+    });
+    cmx += (tmx - cmx) * 0.05;
+    cmy += (tmy - cmy) * 0.05;
+    camera.position.x = cmx;
+    camera.position.y = -cmy;
+    camera.lookAt(0, 0, 0);
+    renderer.render(scene, camera);
+  }
+  tick();
+}
+
+if (document.readyState === 'complete') {
+  initHero();
+} else {
+  window.addEventListener('load', initHero);
+}
+</script>
+
 </body>
 </html>

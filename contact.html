@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get a Free Demo — VickersPro Web Design Cincinnati</title>
+  <meta name="description" content="See your custom website before you pay anything. VickersPro builds a free demo for Cincinnati small businesses — no commitment, no risk.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── PAGE LAYOUT ── */
+    .contact-page {
+      min-height: 100svh;
+      padding: calc(var(--nav-h) + 72px) 60px 100px;
+      background: var(--bg);
+    }
+
+    .contact-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+
+    /* ── LEFT: INFO ── */
+    .contact-info .label { margin-bottom: 20px; }
+    .contact-info h1 { font-size: clamp(36px, 5vw, 58px); margin-bottom: 22px; }
+    .contact-info > p { font-size: 17px; margin-bottom: 48px; }
+
+    .info-items {
+      display: flex; flex-direction: column; gap: 24px;
+    }
+
+    .info-item {
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+
+    .info-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: var(--blue-low);
+      border: 1px solid rgba(0,153,255,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .info-item h3 {
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.5px; margin-bottom: 4px;
+      color: var(--white);
+    }
+    .info-item p  { font-size: 14px; color: var(--gray); line-height: 1.5; }
+    .info-item a  { color: var(--blue); text-decoration: none; }
+    .info-item a:hover { text-decoration: underline; }
+
+    .guarantee {
+      margin-top: 48px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+
+    .guarantee-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--blue-low);
+      border: 1px solid rgba(0,153,255,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .guarantee h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .guarantee p  { font-size: 13px; color: var(--gray); line-height: 1.55; }
+
+    /* ── RIGHT: FORM ── */
+    .contact-form-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      position: sticky; top: calc(var(--nav-h) + 24px);
+    }
+
+    .form-title {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .form-sub {
+      font-size: 14px; color: var(--gray); margin-bottom: 32px;
+    }
+
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+    .field label { font-size: 13px; font-weight: 600; color: var(--off); }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 15px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,153,255,0.12);
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--muted); }
+
+    .field select { cursor: pointer; color: var(--white); }
+    .field select option { background: #0D1525; color: var(--white); }
+
+    .field textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--blue); color: var(--white);
+      padding: 15px 28px; border-radius: 10px;
+      font-family: var(--font); font-size: 16px; font-weight: 600;
+      border: none; cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .form-submit:hover {
+      background: #007ACC;
+      box-shadow: 0 8px 40px rgba(0,153,255,0.45);
+      transform: translateY(-2px);
+    }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .form-note {
+      font-size: 12px; color: var(--muted);
+      text-align: center; margin-top: 14px; line-height: 1.5;
+    }
+
+    /* Success / Error states */
+    .form-status {
+      display: none;
+      padding: 16px 20px;
+      border-radius: 10px;
+      font-size: 14px; font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .form-status.success {
+      display: block;
+      background: rgba(0, 200, 100, 0.1);
+      border: 1px solid rgba(0, 200, 100, 0.25);
+      color: #22CC77;
+    }
+    .form-status.error {
+      display: block;
+      background: rgba(255, 70, 70, 0.1);
+      border: 1px solid rgba(255, 70, 70, 0.25);
+      color: #FF6666;
+    }
+
+    @media (max-width: 900px) {
+      .contact-page { padding: calc(var(--nav-h) + 48px) 24px 72px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-form-wrap { position: static; padding: 32px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- Loading Screen -->
+<div id="loader">
+  <div class="ld-mark">Vickers<span>Pro</span></div>
+  <div class="ld-track"><div class="ld-fill"></div></div>
+</div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Vickers<span>Pro</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Get Free Demo</a>
+    <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="mm-cta">Get Free Demo</a>
+</div>
+
+<!-- ======================================================
+     CONTACT PAGE
+     ====================================================== -->
+<main class="contact-page">
+  <div class="contact-grid">
+
+    <!-- LEFT: Info -->
+    <div class="contact-info">
+      <div class="label reveal">Free Demo</div>
+      <h1 class="reveal">Let's build your<br><span style="color:var(--blue)">website</span></h1>
+      <p class="reveal d1">Fill out the form and we'll build a real demo of your website — for free. You see it, you love it, then you decide.</p>
+
+      <div class="info-items">
+
+        <div class="info-item reveal d1">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="1" y="4" width="18" height="13" rx="2.5" stroke="#0099FF" stroke-width="1.6"/>
+              <path d="M1 8l9 5.5L19 8" stroke="#0099FF" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Email Us</h3>
+            <p><a href="mailto:vickers1professional@gmail.com">vickers1professional@gmail.com</a></p>
+          </div>
+        </div>
+
+        <div class="info-item reveal d2">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M10 1C6.686 1 4 3.686 4 7c0 5.25 6 12 6 12s6-6.75 6-12c0-3.314-2.686-6-6-6z" stroke="#0099FF" stroke-width="1.6"/>
+              <circle cx="10" cy="7" r="2" stroke="#0099FF" stroke-width="1.6"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Location</h3>
+            <p>Cincinnati, OH — serving businesses across Greater Cincinnati</p>
+          </div>
+        </div>
+
+        <div class="info-item reveal d3">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="10" r="8.5" stroke="#0099FF" stroke-width="1.6"/>
+              <path d="M10 5.5v4.5l3 2" stroke="#0099FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Response Time</h3>
+            <p>We respond same business day. Demo delivered within 48 hours.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="guarantee reveal d4">
+        <div class="guarantee-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 2L2 6v6c0 5.2 3.9 10 8 11 4.1-1 8-5.8 8-11V6L10 2z" stroke="#0099FF" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M6.5 10l3 3 5-5" stroke="#0099FF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Zero Risk Guarantee</h4>
+          <p>We build your demo first. See the real website built for your business before you pay a single dollar. No pressure, no obligation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="contact-form-wrap reveal">
+      <div class="form-title">Request Your Free Demo</div>
+      <div class="form-sub">We'll build it and send it to you within 48 hours.</div>
+
+      <div class="form-status" id="form-status"></div>
+
+      <form id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="first_name" placeholder="John" required autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="last_name" placeholder="Smith" required autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@yourbusiness.com" required autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(513) 000-0000" autocomplete="tel">
+        </div>
+
+        <div class="field">
+          <label for="business">Business Name</label>
+          <input type="text" id="business" name="business_name" placeholder="Smith's Auto Repair" required>
+        </div>
+
+        <div class="field">
+          <label for="type">Business Type</label>
+          <select id="type" name="business_type">
+            <option value="" disabled selected>Select your industry</option>
+            <option>Restaurant / Food</option>
+            <option>Auto / Mechanical</option>
+            <option>Health / Medical</option>
+            <option>Beauty / Salon</option>
+            <option>Construction / Trades</option>
+            <option>Retail / Shop</option>
+            <option>Legal / Professional</option>
+            <option>Fitness / Wellness</option>
+            <option>Real Estate</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="service">I'm interested in...</label>
+          <select id="service" name="service">
+            <option value="" disabled selected>Select a service</option>
+            <option>New Website — I have nothing online yet</option>
+            <option>Full Redesign — I have an outdated site</option>
+            <option>Monthly Care — I need ongoing management</option>
+            <option>Not sure — just want to see the demo</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Anything else we should know? <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+          <textarea id="message" name="message" placeholder="Tell us about your business, your goals, or what you're looking for..."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit" id="submit-btn">
+          Send My Demo Request
+        </button>
+        <p class="form-note">No spam. No sales calls. Just your website, ready to review.</p>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<!-- ======================================================
+     FOOTER
+     ====================================================== -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <a href="index.html" class="ft-logo">Vickers<span>Pro</span></a>
+      <p>Cincinnati's local web design agency. New site live within a week.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#new">New Websites</a></li>
+        <li><a href="services.html#redesign">Full Redesigns</a></li>
+        <li><a href="services.html#care">Monthly Care</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:vickers1professional@gmail.com">vickers1professional@gmail.com</a></li>
+        <li><a href="contact.html">Get a Free Demo</a></li>
+        <li><a href="#">Cincinnati, OH</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>&copy; 2026 VickersPro. All rights reserved.</span>
+    <span>Cincinnati, OH</span>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cursor');
+const trail=document.getElementById('cursor-trail');
+let mx=0,my=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animCursor(){tx+=(mx-tx)*0.14;ty+=(my-ty)*0.14;if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}if(trail){trail.style.left=tx+'px';trail.style.top=ty+'px';}requestAnimationFrame(animCursor);}
+animCursor();
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));});
+
+/* LOADER */
+const loader=document.getElementById('loader');
+window.addEventListener('load',()=>{setTimeout(()=>loader&&loader.classList.add('out'),900);});
+
+/* NAV */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);},{passive:true});
+nav.classList.toggle('scrolled',window.scrollY>40);
+
+/* MOBILE MENU */
+const ham=document.getElementById('ham');
+const menu=document.getElementById('mobile-menu');
+let open=false;
+ham.addEventListener('click',()=>{open=!open;ham.classList.toggle('open',open);menu.classList.toggle('open',open);ham.setAttribute('aria-expanded',open);menu.setAttribute('aria-hidden',!open);});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{open=false;ham.classList.remove('open');menu.classList.remove('open');}));
+
+/* SCROLL REVEAL */
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* CONTACT FORM */
+const form   = document.getElementById('contact-form');
+const status = document.getElementById('form-status');
+const submit = document.getElementById('submit-btn');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  status.className = 'form-status';
+  status.textContent = '';
+
+  /* Basic validation */
+  const required = form.querySelectorAll('[required]');
+  let valid = true;
+  required.forEach(field => {
+    if (!field.value.trim()) {
+      field.style.borderColor = 'rgba(255,100,100,0.6)';
+      valid = false;
+    } else {
+      field.style.borderColor = '';
+    }
+  });
+  if (!valid) {
+    status.className = 'form-status error';
+    status.textContent = 'Please fill in all required fields.';
+    return;
+  }
+
+  submit.disabled = true;
+  submit.textContent = 'Sending...';
+
+  const data = new FormData(form);
+  data.append('_subject', 'New Demo Request — VickersPro');
+  data.append('_replyto', data.get('email'));
+
+  try {
+    const res = await fetch('https://formspree.io/f/vickers1professional@gmail.com', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      status.className = 'form-status success';
+      status.textContent = "Request sent! We'll have your demo ready within 48 hours.";
+      form.reset();
+    } else {
+      throw new Error();
+    }
+  } catch {
+    /* Fallback: open mailto */
+    const name  = data.get('first_name') + ' ' + data.get('last_name');
+    const biz   = data.get('business_name') || '';
+    const svc   = data.get('service') || '';
+    const msg   = data.get('message') || '';
+    const body  = encodeURIComponent(`Name: ${name}\nBusiness: ${biz}\nService: ${svc}\n\n${msg}`);
+    window.location.href = `mailto:vickers1professional@gmail.com?subject=Demo+Request+from+${encodeURIComponent(name)}&body=${body}`;
+  } finally {
+    submit.disabled = false;
+    submit.textContent = 'Send My Demo Request';
+  }
+});
+
+/* Clear red borders on input */
+form.querySelectorAll('input,select,textarea').forEach(el=>{
+  el.addEventListener('input',()=>{ el.style.borderColor=''; });
+});
+</script>
+</body>
+</html>
