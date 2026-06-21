@@ -22,10 +22,45 @@
       padding-top: var(--nav-h);
     }
 
+    /* Galaxy background */
+    #hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+    /* Dark overlay over galaxy */
+    #hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.70) 50%,
+        rgba(0,0,0,0.92) 100%
+      );
+    }
+
+    /* Gold atmospheric glow behind the text */
+    .hero-glow {
+      position: absolute;
+      top: 30%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 900px; height: 500px;
+      background: radial-gradient(ellipse at center,
+        rgba(201,168,76,0.12) 0%,
+        rgba(255,215,0,0.05) 40%,
+        transparent 70%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
     #hero-canvas {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       pointer-events: none;
+      z-index: 1;
     }
 
     .hero-content {
@@ -36,12 +71,11 @@
     }
 
     .hero-content .label { margin-bottom: 24px; }
-
     .hero-content h1 { margin-bottom: 24px; }
 
-    .blue-text {
-      color: var(--blue);
-      text-shadow: 0 0 60px rgba(0, 153, 255, 0.4);
+    .gold-text {
+      color: var(--gold-bright);
+      text-shadow: 0 0 80px rgba(255,215,0,0.55), 0 0 160px rgba(201,168,76,0.25);
     }
 
     .hero-sub {
@@ -67,7 +101,7 @@
     }
     .hero-scroll-line {
       width: 1.5px; height: 40px;
-      background: linear-gradient(to bottom, transparent, var(--blue));
+      background: linear-gradient(to bottom, transparent, var(--gold));
     }
     .hero-scroll span {
       font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
@@ -95,22 +129,33 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 36px 32px;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.4s;
+      position: relative; overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     .card:hover {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 1px rgba(0,153,255,0.12), 0 20px 56px rgba(0,153,255,0.08);
-      transform: translateY(-4px);
+      border-color: rgba(201,168,76,0.45);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.1), 0 20px 56px rgba(201,168,76,0.10);
+      transform: translateY(-6px);
     }
+    .card:hover::before { opacity: 1; }
 
     .card-icon {
       width: 52px; height: 52px;
-      background: var(--blue-low);
+      background: var(--gold-low);
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 24px;
-      border: 1px solid rgba(0,153,255,0.2);
+      border: 1px solid rgba(201,168,76,0.25);
     }
 
     .card h3 { color: var(--white); margin-bottom: 12px; }
@@ -131,7 +176,8 @@
     .timeline::before {
       content: '';
       position: absolute; left: 28px; top: 20px; bottom: 20px;
-      width: 1px; background: var(--border);
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold-mid), transparent);
     }
 
     .tl-item {
@@ -143,13 +189,13 @@
     .tl-num {
       width: 56px; height: 56px; flex-shrink: 0;
       background: var(--bg-card);
-      border: 1.5px solid var(--blue);
+      border: 1.5px solid var(--gold);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 700; color: var(--blue);
+      font-size: 15px; font-weight: 700; color: var(--gold);
       letter-spacing: -0.5px;
       position: relative; z-index: 1;
-      box-shadow: 0 0 24px rgba(0, 153, 255, 0.18);
+      box-shadow: 0 0 24px rgba(201,168,76,0.25), 0 0 48px rgba(201,168,76,0.08);
     }
 
     .tl-body { padding-top: 14px; }
@@ -162,93 +208,8 @@
       .tl-item { gap: 20px; }
     }
 
-    /* ── PRICING ── */
-    #pricing { background: var(--bg); }
-    #pricing .sec-head { max-width: 600px; margin-bottom: 16px; }
-    #pricing h2 { margin-bottom: 18px; }
-
-    .pricing-note-top {
-      color: var(--gray); font-size: 15px;
-      margin-bottom: 56px;
-    }
-    .pricing-note-top strong { color: var(--blue); font-weight: 600; }
-
-    .pricing-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      align-items: start;
-    }
-
-    .p-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 36px 32px;
-      position: relative;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    }
-
-    .p-card:hover {
-      border-color: rgba(0,153,255,0.5);
-      box-shadow: 0 0 0 1px rgba(0,153,255,0.12), 0 24px 64px rgba(0,153,255,0.1);
-      transform: translateY(-6px);
-    }
-
-    .p-card.featured {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 1px rgba(0,153,255,0.15), 0 0 80px rgba(0,153,255,0.08);
-    }
-
-    .p-badge {
-      display: inline-block;
-      background: var(--blue-low);
-      border: 1px solid rgba(0,153,255,0.3);
-      color: var(--blue);
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      padding: 4px 12px; border-radius: 20px;
-      margin-bottom: 20px;
-    }
-
-    .p-tier {
-      font-size: 13px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--gray); margin-bottom: 16px;
-    }
-
-    .p-price {
-      display: flex; align-items: baseline; gap: 4px;
-      margin-bottom: 28px;
-    }
-    .p-price .amount {
-      font-size: 52px; font-weight: 800;
-      letter-spacing: -3px; line-height: 1;
-      color: var(--white);
-    }
-    .p-price .per {
-      font-size: 16px; color: var(--gray); font-weight: 500;
-    }
-
-    .p-features {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 13px;
-      margin-bottom: 36px;
-    }
-
-    .p-features li {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 14px; color: var(--off);
-    }
-
-    .p-features li svg { flex-shrink: 0; }
-
-    .p-card .btn { width: 100%; justify-content: center; }
-
-    @media (max-width: 900px) { .pricing-cards { grid-template-columns: 1fr; max-width: 400px; } }
-
     /* ── WHY US ── */
-    #why-us { background: var(--bg-2); }
+    #why-us { background: var(--bg); }
     #why-us .sec-head { max-width: 600px; margin-bottom: 64px; }
     #why-us h2 { margin-bottom: 18px; }
 
@@ -263,15 +224,30 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 36px 28px;
-      transition: border-color 0.3s, transform 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative; overflow: hidden;
     }
-    .stat-card:hover { border-color: rgba(0,153,255,0.3); transform: translateY(-4px); }
+    .stat-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .stat-card:hover {
+      border-color: rgba(201,168,76,0.35);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.08), 0 16px 48px rgba(201,168,76,0.07);
+      transform: translateY(-4px);
+    }
+    .stat-card:hover::after { opacity: 1; }
 
     .stat-num {
       font-size: clamp(42px, 5vw, 60px);
       font-weight: 800; letter-spacing: -3px;
-      color: var(--blue); line-height: 1;
+      color: var(--gold); line-height: 1;
       margin-bottom: 12px;
+      text-shadow: 0 0 40px rgba(201,168,76,0.3);
     }
 
     .stat-label {
@@ -283,7 +259,7 @@
     @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
 
     /* ── CTA ── */
-    #cta { background: var(--bg); }
+    #cta { background: var(--bg-2); }
 
     .cta-box {
       background: var(--bg-card);
@@ -297,9 +273,16 @@
     .cta-box::before {
       content: '';
       position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 300px;
-      background: radial-gradient(ellipse, rgba(0,153,255,0.1) 0%, transparent 70%);
+      width: 700px; height: 350px;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
       pointer-events: none;
+    }
+
+    .cta-box::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-hi), transparent);
     }
 
     .cta-box .label { margin-bottom: 20px; }
@@ -358,10 +341,12 @@
      HERO
      ====================================================== -->
 <section id="hero">
+  <div id="hero-bg" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-content">
     <div class="label">Cincinnati Web Design</div>
-    <h1>We Build Websites<br>That Get You<br><span class="blue-text">Customers</span></h1>
+    <h1>We Build Websites<br>That Get You<br><span class="gold-text">Customers</span></h1>
     <p class="hero-sub">Cincinnati's local web design agency — new site live within a week.</p>
     <div class="hero-btns">
       <a href="contact.html" class="btn btn-primary">Get a Free Demo</a>
@@ -373,6 +358,8 @@
     <span>Scroll</span>
   </div>
 </section>
+
+<div class="sec-divider"></div>
 
 <!-- ======================================================
      WHAT WE DO
@@ -389,8 +376,8 @@
       <div class="card reveal d1">
         <div class="card-icon">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <rect x="2" y="4" width="24" height="16" rx="2.5" stroke="#0099FF" stroke-width="1.8"/>
-            <path d="M10 26h8M14 20v6" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round"/>
+            <rect x="2" y="4" width="24" height="16" rx="2.5" stroke="#C9A84C" stroke-width="1.8"/>
+            <path d="M10 26h8M14 20v6" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round"/>
           </svg>
         </div>
         <h3>New Websites</h3>
@@ -400,8 +387,8 @@
       <div class="card reveal d2">
         <div class="card-icon">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <path d="M6 14C6 9.58 9.58 6 14 6c2.8 0 5.26 1.4 6.8 3.5L18 12h7V5l-2.5 2.5" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M22 14c0 4.42-3.58 8-8 8-2.8 0-5.26-1.4-6.8-3.5L10 16H3v7l2.5-2.5" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 14C6 9.58 9.58 6 14 6c2.8 0 5.26 1.4 6.8 3.5L18 12h7V5l-2.5 2.5" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 14c0 4.42-3.58 8-8 8-2.8 0-5.26-1.4-6.8-3.5L10 16H3v7l2.5-2.5" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3>Full Redesigns</h3>
@@ -411,8 +398,8 @@
       <div class="card reveal d3">
         <div class="card-icon">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-            <path d="M14 3L3 8v8c0 6.08 4.72 11.76 11 13 6.28-1.24 11-6.92 11-13V8L14 3z" stroke="#0099FF" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M9.5 14l3 3 6-6" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 3L3 8v8c0 6.08 4.72 11.76 11 13 6.28-1.24 11-6.92 11-13V8L14 3z" stroke="#C9A84C" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M9.5 14l3 3 6-6" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3>Monthly Care</h3>
@@ -422,6 +409,8 @@
     </div>
   </div>
 </section>
+
+<div class="sec-divider"></div>
 
 <!-- ======================================================
      HOW IT WORKS
@@ -471,104 +460,7 @@
   </div>
 </section>
 
-<!-- ======================================================
-     PRICING
-     ====================================================== -->
-<section id="pricing">
-  <div class="container">
-    <div class="sec-head">
-      <div class="label reveal">Pricing</div>
-      <h2 class="reveal">Simple, transparent<br>monthly plans</h2>
-    </div>
-    <p class="pricing-note-top reveal d1"><strong>Build fee waived</strong> on all 12-month plans. Cancel anytime on month-to-month.</p>
-
-    <div class="pricing-cards">
-
-      <div class="p-card reveal d1">
-        <div class="p-tier">Basic</div>
-        <div class="p-price">
-          <span class="amount">$150</span>
-          <span class="per">/mo</span>
-        </div>
-        <ul class="p-features">
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Custom website
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Hosting included
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Security &amp; backups
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Monthly content updates
-          </li>
-        </ul>
-        <a href="contact.html" class="btn btn-outline">Get Started</a>
-      </div>
-
-      <div class="p-card featured reveal d2">
-        <div class="p-badge">Most Popular</div>
-        <div class="p-tier">Standard</div>
-        <div class="p-price">
-          <span class="amount">$250</span>
-          <span class="per">/mo</span>
-        </div>
-        <ul class="p-features">
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Everything in Basic
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Local SEO optimization
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Google Business setup
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Monthly ranking report
-          </li>
-        </ul>
-        <a href="contact.html" class="btn btn-primary">Get Started</a>
-      </div>
-
-      <div class="p-card reveal d3">
-        <div class="p-tier">Growth</div>
-        <div class="p-price">
-          <span class="amount">$400</span>
-          <span class="per">/mo</span>
-        </div>
-        <ul class="p-features">
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Everything in Standard
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Google Ads management
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Monthly performance report
-          </li>
-          <li>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8l3.5 3.5L13 4" stroke="#0099FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Priority support
-          </li>
-        </ul>
-        <a href="contact.html" class="btn btn-outline">Get Started</a>
-      </div>
-
-    </div>
-  </div>
-</section>
+<div class="sec-divider"></div>
 
 <!-- ======================================================
      WHY US
@@ -605,6 +497,8 @@
     </div>
   </div>
 </section>
+
+<div class="sec-divider"></div>
 
 <!-- ======================================================
      CTA
@@ -676,7 +570,7 @@
 /* ============================================================
    CURSOR
    ============================================================ */
-const cur  = document.getElementById('cursor');
+const cur   = document.getElementById('cursor');
 const trail = document.getElementById('cursor-trail');
 let mx = 0, my = 0, tx = 0, ty = 0;
 
@@ -691,7 +585,7 @@ function animCursor() {
 }
 animCursor();
 
-document.querySelectorAll('a, button, .card, .p-card, .stat-card').forEach(el => {
+document.querySelectorAll('a, button, .card, .stat-card').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
 });
@@ -770,9 +664,9 @@ const statIO = new IntersectionObserver(entries => {
     if (!e.isIntersecting) return;
     const el = e.target;
     if (el.classList.contains('no-count')) return;
-    const target  = parseInt(el.dataset.count, 10);
-    const prefix  = el.dataset.prefix  || '';
-    const suffix  = el.dataset.suffix  || '';
+    const target = parseInt(el.dataset.count, 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
     countUp(el, target, prefix, suffix, 1400);
     statIO.unobserve(el);
   });
@@ -781,12 +675,12 @@ const statIO = new IntersectionObserver(entries => {
 document.querySelectorAll('.stat-num').forEach(el => statIO.observe(el));
 
 /* ============================================================
-   THREE.JS HERO
+   THREE.JS HERO — gold wireframe shapes
    ============================================================ */
 function initHero() {
   if (typeof THREE === 'undefined') return;
 
-  const canvas = document.getElementById('hero-canvas');
+  const canvas  = document.getElementById('hero-canvas');
   const section = document.getElementById('hero');
   if (!canvas || !section) return;
 
@@ -799,12 +693,11 @@ function initHero() {
   renderer.setClearColor(0x000000, 0);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x07090F, 0.022);
 
   const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 200);
   camera.position.z = 28;
 
-  /* Geometries */
+  /* Gold wireframe shapes */
   const geoData = [
     { geo: new THREE.IcosahedronGeometry(3.2, 0),  pos: [-10, 4, -8],  speed: 0.004 },
     { geo: new THREE.OctahedronGeometry(2.2),       pos: [10, -3, -6],  speed: 0.006 },
@@ -817,24 +710,24 @@ function initHero() {
 
   const meshes = geoData.map(({ geo, pos, speed }) => {
     const mat = new THREE.MeshBasicMaterial({
-      color: 0x0099FF,
+      color: 0xC9A84C,
       wireframe: true,
       transparent: true,
-      opacity: 0.22,
+      opacity: 0.28,
     });
     const mesh = new THREE.Mesh(geo, mat);
     mesh.position.set(...pos);
     mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
     scene.add(mesh);
-    return { mesh, speed, rx: (Math.random() - 0.5) * 0.01, ry: (Math.random() - 0.5) * 0.01 };
+    return { mesh, speed };
   });
 
-  /* Solid dim fills */
+  /* Subtle gold fill behind wireframes */
   geoData.forEach(({ geo, pos }) => {
     const mat = new THREE.MeshBasicMaterial({
-      color: 0x003366,
+      color: 0x5C3D00,
       transparent: true,
-      opacity: 0.06,
+      opacity: 0.05,
     });
     const mesh = new THREE.Mesh(geo, mat);
     mesh.position.set(...pos);
@@ -842,14 +735,12 @@ function initHero() {
   });
 
   /* Mouse parallax */
-  let tmx = 0, tmy = 0;
-  let cmx = 0, cmy = 0;
+  let tmx = 0, tmy = 0, cmx = 0, cmy = 0;
   document.addEventListener('mousemove', e => {
     tmx = (e.clientX / window.innerWidth  - 0.5) * 5;
     tmy = (e.clientY / window.innerHeight - 0.5) * 3;
   });
 
-  /* Resize */
   const onResize = () => {
     const nw = section.offsetWidth, nh = section.offsetHeight;
     camera.aspect = nw / nh;
@@ -858,7 +749,6 @@ function initHero() {
   };
   window.addEventListener('resize', onResize, { passive: true });
 
-  /* Animate */
   let animating = true;
   const heroObs = new IntersectionObserver(([e]) => { animating = e.isIntersecting; });
   heroObs.observe(section);
